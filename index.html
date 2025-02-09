@@ -1,22 +1,89 @@
+# Let's create a simple HTML layout for a blog website in the requested style.
+
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
+    <title>MacBook Pro M1 Blog</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
         }
-        h1 {
-            color: #333;
+        header {
+            background-color: #111;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+        nav {
+            text-align: center;
+            background-color: #222;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 1.1em;
+        }
+        nav a:hover {
+            background-color: #444;
+        }
+        article {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #333;
+            border-radius: 8px;
+        }
+        article h2 {
+            font-size: 2.5em;
+        }
+        article p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #111;
+            color: #888;
         }
     </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>Welcome to Hasif Juman's website.</p>
+
+<header>
+    <h1>Tech Talk Blog</h1>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
+
+<article>
+    <h2>The Power of the MacBook Pro M1</h2>
+    <p>The MacBook Pro 16-inch with the M1 chip is a game-changer. Apple’s transition to their custom silicon has been a significant leap in the performance of their laptops. The M1 chip offers impressive speed, power efficiency, and longer battery life, setting a new standard in the industry.</p>
+    <p>When comparing the M1 chip to Intel-based Macs, the difference is undeniable. The performance leap is most evident in tasks like video editing, software development, and other power-hungry applications. The 16-inch MacBook Pro, with its larger screen, provides a perfect workspace for professionals who need power and portability.</p>
+    <p>Not only does the M1 chip provide incredible processing power, but it also integrates graphics, memory, and other key functions directly into the chip itself, leading to better overall performance and efficiency. Battery life, which was once a concern with high-powered laptops, has been dramatically improved with the M1 chip, allowing users to work throughout the day without needing to recharge.</p>
+    <p>In conclusion, the MacBook Pro M1 is a major step forward for Apple, providing users with a powerful, efficient, and highly capable laptop. Whether you are a creative professional or someone who needs a machine that can handle intensive tasks, the MacBook Pro M1 is a top-tier option.</p>
+</article>
+
+<footer>
+    <p>© 2025 Tech Talk Blog. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
+"""
