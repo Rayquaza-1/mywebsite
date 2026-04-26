@@ -1,88 +1,781 @@
-updated_html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MacBook Pro M1 Blog</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            color: #000;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #222;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 3em;
-            margin: 0;
-            color: #fff;
-        }
-        nav {
-            text-align: center;
-            background-color: #333;
-            padding: 10px 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 15px;
-            font-size: 1.1em;
-        }
-        nav a:hover {
-            background-color: #555;
-        }
-        article {
-            padding: 20px;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: #f4f4f4;
-            border-radius: 8px;
-        }
-        article h2 {
-            font-size: 2.5em;
-        }
-        article p {
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #222;
-            color: #fff;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fixitbytez — Tech Tips, Repairs & Guides</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0e0e0f;
+    --bg2: #161618;
+    --bg3: #1e1e21;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0ede8;
+    --muted: #8a8784;
+    --accent: #e8623a;
+    --accent2: #f5a164;
+    --green: #4ade80;
+    --heading: 'Syne', sans-serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(14,14,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: var(--heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 400;
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  nav ul a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 7rem 2rem 5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -120px;
+    width: 520px;
+    height: 520px;
+    background: radial-gradient(circle, rgba(232,98,58,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(232,98,58,0.35);
+    border-radius: 100px;
+    padding: 4px 14px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--heading);
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 800;
+    line-height: 1.07;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 10px 22px;
+    border-radius: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .hero-cta:hover { background: #d0522c; transform: translateY(-1px); }
+
+  /* SECTION WRAPPER */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--heading);
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.75rem;
+    line-height: 1.15;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-avatar-wrap {
+    position: relative;
+  }
+
+  .about-avatar {
+    width: 100%;
+    aspect-ratio: 1/1;
+    max-width: 300px;
+    border-radius: 16px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--heading);
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-avatar::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(232,98,58,0.12), transparent);
+  }
+
+  .about-badge {
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+    background: var(--accent);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  .about-text h2 { margin-bottom: 1rem; }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1rem;
+    font-size: 0.975rem;
+  }
+
+  .skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1.5rem;
+  }
+
+  .skill-chip {
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 5px 13px;
+    border-radius: 100px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    background: var(--bg3);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .skill-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2.5rem;
+  }
+
+  .stat-box {
+    background: var(--bg2);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--heading);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* VIDEOS */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .video-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s, transform 0.2s;
+    display: block;
+  }
+
+  .video-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-3px);
+  }
+
+  .video-thumb {
+    aspect-ratio: 16/9;
+    background: var(--bg3);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-thumb-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+
+  .video-play {
+    width: 48px;
+    height: 48px;
+    background: rgba(232,98,58,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .video-card:hover .video-play { transform: scale(1.1); background: var(--accent); }
+
+  .play-arrow {
+    width: 0;
+    height: 0;
+    border-top: 9px solid transparent;
+    border-bottom: 9px solid transparent;
+    border-left: 15px solid white;
+    margin-left: 3px;
+  }
+
+  .video-info {
+    padding: 1rem 1.1rem 1.2rem;
+  }
+
+  .video-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .video-info h3 {
+    font-family: var(--heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+
+  .video-meta {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* BLOGS */
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .blog-card {
+    background: var(--bg2);
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.15s;
+  }
+
+  .blog-card:hover { background: var(--bg3); }
+
+  .blog-num {
+    font-family: var(--heading);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--border2);
+    line-height: 1;
+    min-width: 2.5rem;
+    padding-top: 4px;
+    transition: color 0.2s;
+  }
+
+  .blog-card:hover .blog-num { color: var(--accent); }
+
+  .blog-body { flex: 1; }
+
+  .blog-tags {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .blog-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(232,98,58,0.1);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+
+  .blog-card h3 {
+    font-family: var(--heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
+  }
+
+  .blog-card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+
+  .blog-date {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .blog-arrow {
+    font-size: 1.2rem;
+    color: var(--muted);
+    align-self: center;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .blog-card:hover .blog-arrow { color: var(--accent); transform: translateX(3px); }
+
+  /* FEATURED POST */
+  .featured-post {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    margin-bottom: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .featured-post::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .featured-post:hover { border-color: var(--border2); transform: translateY(-2px); }
+
+  .featured-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .featured-post h3 {
+    font-family: var(--heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+
+  .featured-post p {
+    font-size: 0.925rem;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 680px;
+  }
+
+  .featured-meta {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    max-width: 1040px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: var(--heading);
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  @media (max-width: 680px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .stats-row .stat-box:last-child { grid-column: 1 / -1; }
+    nav ul { gap: 1rem; }
+  }
+</style>
 </head>
 <body>
 
-<header>
-    <h1>Fixitbytez Blog</h1>
-</header>
-
 <nav>
-    <a href="/home">Home</a>
-    <a href="/about">About</a>
-    <a href="/contact">Contact</a>
+  <a href="#" class="nav-logo">fixitby<span>tez</span></a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="https://fixitbytez.org/contact">Contact</a></li>
+  </ul>
 </nav>
 
-<article>
-    <h2>The Power of the MacBook Pro M1</h2>
-    <p>The MacBook Pro 16-inch with the M1 chip is a game-changer. Apple’s transition to their custom silicon has been a significant leap in the performance of their laptops. The M1 chip offers impressive speed, power efficiency, and longer battery life, setting a new standard in the industry.</p>
-    <p>When comparing the M1 chip to Intel-based Macs, the difference is undeniable. The performance leap is most evident in tasks like video editing, software development, and other power-hungry applications. The 16-inch MacBook Pro, with its larger screen, provides a perfect workspace for professionals who need power and portability.</p>
-    <p>Not only does the M1 chip provide incredible processing power, but it also integrates graphics, memory, and other key functions directly into the chip itself, leading to better overall performance and efficiency. Battery life, which was once a concern with high-powered laptops, has been dramatically improved with the M1 chip, allowing users to work throughout the day without needing to recharge.</p>
-    <p>In conclusion, the MacBook Pro M1 is a major step forward for Apple, providing users with a powerful, efficient, and highly capable laptop. Whether you are a creative professional or someone who needs a machine that can handle intensive tasks, the MacBook Pro M1 is a top-tier option.</p>
-</article>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Tech tips &amp; repairs</div>
+  <h1>Fix it. Learn it.<br><em>Master it.</em></h1>
+  <p>Guides, teardowns, and honest takes on the tech you use every day — from Apple silicon to everyday gadget repair.</p>
+  <a href="#blog" class="hero-cta">Read the latest ↓</a>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-avatar-wrap">
+      <div class="about-avatar">
+        FB
+        <div class="about-badge">Est. 2024</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="section-label">Who I am</p>
+      <h2 class="section-title">The person behind the wrench</h2>
+      <p>Hey — I'm the creator behind Fixitbytez. I've always been obsessed with understanding how things work, which means taking them apart, figuring out why they broke, and putting them back together (usually better than before).</p>
+      <p>This site started as a place to document my own repair adventures and tech experiments. Whether it's a deep dive into Apple's M-series chips, reviving a dead laptop, or comparing tools that actually hold up — you'll find real, hands-on coverage here.</p>
+      <p>No sponsored fluff, no PR copy. Just honest tech content.</p>
+      <div class="skills-row">
+        <span class="skill-chip">Apple Silicon</span>
+        <span class="skill-chip">Hardware Repair</span>
+        <span class="skill-chip">MacOS</span>
+        <span class="skill-chip">iOS</span>
+        <span class="skill-chip">Gadget Reviews</span>
+        <span class="skill-chip">DIY Tech</span>
+      </div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-box">
+      <span class="stat-num">50+</span>
+      <span class="stat-label">Articles published</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">12k</span>
+      <span class="stat-label">Monthly readers</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Independent</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- VIDEOS -->
+<section id="videos">
+  <p class="section-label">Watch &amp; learn</p>
+  <h2 class="section-title">Videos</h2>
+  <p class="section-desc">Visual walkthroughs for when reading just isn't enough. Subscribe for new drops every week.</p>
+  <div class="video-grid">
+    <a href="https://fixitbytez.org" class="video-card">
+      <div class="video-thumb">
+        <div class="video-thumb-bg" style="background: linear-gradient(135deg, #1a1a2e, #16213e); font-size:2.5rem;">💻</div>
+        <div class="video-play"><div class="play-arrow"></div></div>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">MacBook</div>
+        <h3>M1 MacBook Pro — Is It Worth It in 2025?</h3>
+        <span class="video-meta">18 min &nbsp;·&nbsp; 4.2k views</span>
+      </div>
+    </a>
+    <a href="https://fixitbytez.org" class="video-card">
+      <div class="video-thumb">
+        <div class="video-thumb-bg" style="background: linear-gradient(135deg, #1a2e1a, #162116); font-size:2.5rem;">🔧</div>
+        <div class="video-play"><div class="play-arrow"></div></div>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">Repair</div>
+        <h3>Replacing a MacBook Battery the Right Way</h3>
+        <span class="video-meta">22 min &nbsp;·&nbsp; 7.8k views</span>
+      </div>
+    </a>
+    <a href="https://fixitbytez.org" class="video-card">
+      <div class="video-thumb">
+        <div class="video-thumb-bg" style="background: linear-gradient(135deg, #2e1a1a, #211616); font-size:2.5rem;">📱</div>
+        <div class="video-play"><div class="play-arrow"></div></div>
+      </div>
+      <div class="video-info">
+        <div class="video-tag">iOS</div>
+        <h3>Hidden iOS Settings You Didn't Know Existed</h3>
+        <span class="video-meta">12 min &nbsp;·&nbsp; 9.1k views</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BLOG -->
+<section id="blog">
+  <p class="section-label">Latest writing</p>
+  <h2 class="section-title">Blog</h2>
+  <p class="section-desc">Long-form guides and opinions on the tech world — written for people who actually care how things work.</p>
+
+  <a href="https://fixitbytez.org" class="featured-post">
+    <div class="featured-label">⭐ Featured Post</div>
+    <h3>The Power of the MacBook Pro M1</h3>
+    <p>Apple's M1 chip changed everything. Here's a deep look at why the 16-inch MacBook Pro with M1 is still one of the most compelling laptops on the market — from the integrated architecture to the all-day battery life that actually delivers.</p>
+    <div class="featured-meta">
+      <span>Apple Silicon</span>
+      <span>·</span>
+      <span>8 min read</span>
+      <span>·</span>
+      <span>2025</span>
+    </div>
+  </a>
+
+  <div class="blog-list">
+    <a href="https://fixitbytez.org" class="blog-card">
+      <span class="blog-num">01</span>
+      <div class="blog-body">
+        <div class="blog-tags"><span class="blog-tag">Hardware</span></div>
+        <h3>M1 vs M2 vs M3 — What Actually Changed?</h3>
+        <p>A chip-by-chip breakdown of Apple Silicon's evolution and who should upgrade.</p>
+        <span class="blog-date">March 2025 &nbsp;·&nbsp; 6 min read</span>
+      </div>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="https://fixitbytez.org" class="blog-card">
+      <span class="blog-num">02</span>
+      <div class="blog-body">
+        <div class="blog-tags"><span class="blog-tag">Repair</span></div>
+        <h3>The Beginner's Guide to Laptop Repair</h3>
+        <p>Tools you need, mistakes to avoid, and when to just take it to a shop.</p>
+        <span class="blog-date">February 2025 &nbsp;·&nbsp; 10 min read</span>
+      </div>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="https://fixitbytez.org" class="blog-card">
+      <span class="blog-num">03</span>
+      <div class="blog-body">
+        <div class="blog-tags"><span class="blog-tag">MacOS</span><span class="blog-tag">Productivity</span></div>
+        <h3>macOS Tips That Saved Me Hours Every Week</h3>
+        <p>Keyboard shortcuts, hidden features, and workflow tweaks for power users.</p>
+        <span class="blog-date">January 2025 &nbsp;·&nbsp; 5 min read</span>
+      </div>
+      <span class="blog-arrow">→</span>
+    </a>
+    <a href="https://fixitbytez.org" class="blog-card">
+      <span class="blog-num">04</span>
+      <div class="blog-body">
+        <div class="blog-tags"><span class="blog-tag">Review</span></div>
+        <h3>Best Budget USB-C Hubs That Don't Suck</h3>
+        <p>Tested six hubs over three months. Here's what I actually kept on my desk.</p>
+        <span class="blog-date">December 2024 &nbsp;·&nbsp; 7 min read</span>
+      </div>
+      <span class="blog-arrow">→</span>
+    </a>
+  </div>
+</section>
 
 <footer>
-    <p>© 2025 Fixitbytez Blog. All rights reserved.</p>
+  <a href="https://fixitbytez.org" class="footer-logo">fixitby<span>tez</span></a>
+  <p>© 2025 Fixitbytez. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="https://fixitbytez.org/home">Home</a>
+    <a href="https://fixitbytez.org/about">About</a>
+    <a href="https://fixitbytez.org/contact">Contact</a>
+  </div>
 </footer>
 
 </body>
 </html>
-"""
